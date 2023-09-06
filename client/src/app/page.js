@@ -42,9 +42,9 @@ export default function Home() {
         if (pathName !== '/') {
           router.push(pathName);
         } else if (auth.user.role === 'user') {
-          router.push('/dashboard-user/employee');
+          router.push('/user/dashboard');
         } else {
-          router.push('/dashboard/admin');
+          router.push('/admin/dashboard');
         }
       }
     }, [auth?.token, router]);

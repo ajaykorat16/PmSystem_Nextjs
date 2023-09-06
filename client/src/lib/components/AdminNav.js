@@ -20,7 +20,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'User List',
-        to: '/dashboard/user/list',
+        to: '/admin/user/list',
       },
       {
         component: CNavItem,

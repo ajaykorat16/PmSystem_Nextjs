@@ -6,7 +6,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
-import { useRouter } from "next/navigation"; // Use useRouter from Next.js
+import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/UserContext";
 
 function Page() {
@@ -19,7 +19,7 @@ function Page() {
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [sortField, setSortField] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState(-1);
-  const router = useRouter(); // Use useRouter from Next.js
+  const router = useRouter(); 
 
   const fetchUsers = async (query, sortField, sortOrder) => {
     setIsLoading(true);
@@ -30,6 +30,7 @@ function Page() {
       sortField,
       sortOrder
     );
+    console.log(userData)
     const totalRecordsCount = userData.totalUsers;
     setTotalRecords(totalRecordsCount);
     setUserList(userData.users);
