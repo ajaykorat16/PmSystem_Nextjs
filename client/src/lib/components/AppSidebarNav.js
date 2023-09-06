@@ -19,10 +19,10 @@ export const AppSidebarNav = ({ items }) => {
   };
 
   const navItem = (item, index) => {
-    const { component, name, badge, icon, ...rest } = item;
+    const { component, name, badge, icon, to } = item;
     const Component = component || NavLink; 
     return (
-      <Component key={index} {...rest}>
+      <Component key={index} href={to}>
         {navLink(name, icon, badge)}
       </Component>
     );
