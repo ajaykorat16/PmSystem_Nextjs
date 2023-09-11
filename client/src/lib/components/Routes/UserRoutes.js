@@ -1,17 +1,17 @@
+'use client'
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "@/lib/context/AuthContext";
 import Spinner from "../Spinner";
 
-const UserRoutes = () => {
+const UserRoutes = ({ children }) => {
   const [ok, setOk] = useState(false);
   const { auth } = useAuth();
 
   useEffect(() => {
     const authCheck = async () => {
-      const res = await axios.get(`/user/user-auth`);
-      if (res.data.ok) {
+      const res = await localStorage.getItem('auth')
+      const data = JSON.parse(res)
+      if (data.user.role == 'user') {
         setOk(true);
       } else {
         setOk(false);
@@ -20,7 +20,7 @@ const UserRoutes = () => {
     if (auth?.token) authCheck();
   }, [auth?.token]);
 
-  return ok ? <Outlet /> : <Spinner />;
+  return ok ? children : <Spinner />;
 };
 
 export default UserRoutes;

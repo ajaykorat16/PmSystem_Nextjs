@@ -1,11 +1,9 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
 import Spinner from "../Spinner";
+import { useAuth } from "@/lib/context/AuthContext";
 
-const AdminRoutes = ({children}) => {
+const AdminRoutes = ({ children }) => {
   const [ok, setOk] = useState(false);
   const { auth } = useAuth();
 

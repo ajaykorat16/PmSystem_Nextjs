@@ -13,12 +13,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Leaves List',
-        to: '/dashboard-user/leave/list',
+        to: '/user/leave/list',
       },
       {
         component: CNavItem,
         name: 'Create Leave',
-        to: '/dashboard-user/leave/create',
+        to: '/user/leave/create',
       }
     ],
   },
@@ -31,12 +31,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Employee List',
-        to: '/dashboard-user/employee/list',
+        to: '/user/employee/list',
       },
       {
         component: CNavItem,
         name: 'Birthday on this Month',
-        to: '/dashboard-user/employee/birtday/list',
+        to: '/user/employee/employeebirthdate',
       },
     ],
   },
@@ -49,25 +49,25 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Project List',
-        to: '/dashboard-user/project/list',
+        to: '/user/project/list',
       }
     ],
   },
   {
     component: CNavGroup,
     name: 'Work Log',
-    to: '/workLog',
+    to: '/worklog',
     icon: <CIcon icon={cilCalendarCheck} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Work Log',
-        to: '/dashboard-user/workLog/list',
+        to: '/user/worklog/list',
       },
       {
         component: CNavItem,
         name: 'Create Work Log',
-        to: '/dashboard-user/workLog/create',
+        to: '/user/worklog/create',
       }
     ],
   },

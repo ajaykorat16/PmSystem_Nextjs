@@ -48,7 +48,7 @@ const WorklogProvider = ({ children }) => {
     // get single worklog
     const getSingleWorklog = async (id) => {
         try {
-            const { data } = await axios.get(`/worklog/single-worklog/${id}`, { headers });
+            const { data } = await axios.get(`http://localhost:8080/worklog/single-worklog/${id}`, { headers });
             return data
         } catch (error) {
             console.log(error);
@@ -58,7 +58,7 @@ const WorklogProvider = ({ children }) => {
     //add workLog
     const createWorkLog = async (addWorkLog) => {
         try {
-            const { data } = await axios.post("/worklog/create", addWorkLog, { headers });
+            const { data } = await axios.post("http://localhost:8080/worklog/create", addWorkLog, { headers });
 
             if (data.error === false) {
                 getWorklog()
@@ -85,7 +85,7 @@ const WorklogProvider = ({ children }) => {
     //update project
     const updateWorklog = async (worklog, id) => {
         try {
-            const { data } = await axios.put(`/worklog/update-worklog/${id}`, worklog, { headers });
+            const { data } = await axios.put(`http://localhost:8080/worklog/update-worklog/${id}`, worklog, { headers });
 
             if (data.error === false) {
                 getWorklog()
@@ -102,7 +102,7 @@ const WorklogProvider = ({ children }) => {
     //delete project
     const deleteWorklog = async (id) => {
         try {
-            const { data } = await axios.delete(`/worklog/delete-worklog/${id}`, { headers });
+            const { data } = await axios.delete(`http://localhost:8080/worklog/delete-worklog/${id}`, { headers });
             if (data.error === false) {
                 getWorklog()
                 toast.success(data.message)
