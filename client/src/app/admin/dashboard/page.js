@@ -6,8 +6,10 @@ import { useAuth } from '@/lib/context/AuthContext';
 import { useWorklog } from '@/lib/context/WorklogContext';
 import { useProject } from '@/lib/context/ProjectContext';
 import { useUser } from '@/lib/context/UserContext';
+import { useRouter } from 'next/navigation';
 
 function page() {
+  const router = useRouter()
   const { auth } = useAuth()
   const { getAdminWorklog } = useWorklog()
   const { getProject } = useProject()
@@ -356,7 +358,7 @@ function page() {
   return (
     <CRow>
       <CCol sm={3}>
-        <a href="/admin/user/list" className="dashboard">
+        <div onClick={()=>router.push("/admin/user/list")} className="dashboard">
           <CWidgetStatsA
             color="primary"
             className="mb-4"
@@ -368,10 +370,10 @@ function page() {
             title="Employee"
             chart={chart1()}
           />
-        </a>
+        </div>
       </CCol>
       <CCol sm={3}>
-        <a href="/admin/project/list" className="dashboard">
+        <div onClick={()=>router.push("/admin/project/list")} className="dashboard">
           <CWidgetStatsA
             className="mb-4"
             color="info"
@@ -383,10 +385,10 @@ function page() {
             title="Projects"
             chart={chart2()}
           />
-        </a>
+        </div>
       </CCol>
       <CCol sm={3}>
-        <a href="/admin/birtday/list" className="dashboard">
+        <div onClick={()=>router.push("/admin/user/employeebirthdate")} className="dashboard">
           <CWidgetStatsA
             className="mb-4"
             color="warning"
@@ -398,10 +400,10 @@ function page() {
             title="Birthday on this month"
             chart={chart3()}
           />
-        </a>
+        </div>
       </CCol>
       <CCol sm={3}>
-        <a href="/admin/workLog/list" className="dashboard">
+        <div onClick={()=>router.push("/admin/worklog/list")} className="dashboard">
           <CWidgetStatsA
             className="mb-4"
             color="danger"
@@ -413,7 +415,7 @@ function page() {
             title="Worklog"
             chart={chart4()}
           />
-        </a>
+        </div>
       </CCol>
     </CRow>
   )

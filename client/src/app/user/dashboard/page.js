@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { CRow, CCol, CWidgetStatsA, CNavLink } from '@coreui/react';
 import { CChartLine, CChartBar } from '@coreui/react-chartjs';
-import { NavLink } from 'next/link';
 import { useAuth } from '@/lib/context/AuthContext';
 import { useLeave } from '@/lib/context/LeaveContext';
 import { useWorklog } from '@/lib/context/WorklogContext';
 import { useProject } from '@/lib/context/ProjectContext';
 import { useUser } from '@/lib/context/UserContext';
+import { useRouter } from 'next/navigation';
 
 function page() {
+  const router  = useRouter()
   const { auth } = useAuth()
   const { getUserLeave } = useLeave()
   const { getWorklog } = useWorklog()
@@ -359,7 +360,7 @@ function page() {
   return (
     <CRow>
       <CCol sm={3}>
-        <a href="/user/leave/list" className='dashboard'>
+        <div onClick={()=>router.push("/user/leave/list")} className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="primary"
@@ -371,10 +372,10 @@ function page() {
             title="Leave This Month"
             chart={chart1()}
           />
-        </a>
+        </div>
       </CCol>
       <CCol sm={3}>
-        <a href="/user/project/list" className='dashboard'>
+        <div onClick={()=>router.push("/user/project/list")} className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="info"
@@ -386,10 +387,10 @@ function page() {
             title="My Projects"
             chart={chart2()}
           />
-        </a>
+        </div>
       </CCol>
       <CCol sm={3}>
-        <a href="/user/employee/employeebirthdate" className='dashboard'>
+        <div onClick={()=>router.push("/user/employee/employeebirthdate")} className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="warning"
@@ -401,10 +402,10 @@ function page() {
             title="Birthday on this month"
             chart={chart3()}
           />
-        </a>
+        </div>
       </CCol>
       <CCol sm={3}>
-        <a href="/user/worklog/list" className='dashboard'>
+        <div onClick={()=>router.push("/user/worklog/list")} className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="danger"
@@ -416,7 +417,7 @@ function page() {
             title="Worklog"
             chart={chart4()}
           />
-        </a>
+        </div>
       </CCol>
     </CRow>
   )

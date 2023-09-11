@@ -9,8 +9,10 @@ import userNavigation from './UserNav'
 import 'simplebar/dist/simplebar.min.css'
 import { Avatar } from 'primereact/avatar'
 import { useAuth } from '../context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 const AppSidebar = () => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
@@ -35,13 +37,13 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <a href={userRole === "user" ? '/user/dashboard' : "/admin/dashboard"} className="d-none d-md-flex pmSystem">
+        <div onClick={()=> router.push(userRole === "user" ? '/user/dashboard' : "/admin/dashboard")} className="d-none d-md-flex pmSystem">
           <Avatar
             image='/kr_logo.ico'
             shape="circle"
             className='logo p-1'
           />  PM SYSTEM
-        </a>
+        </div>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
