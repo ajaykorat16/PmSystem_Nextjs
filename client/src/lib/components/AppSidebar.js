@@ -1,12 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { CNavLink, CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
+import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import { AppSidebarNav } from './AppSidebarNav'
 import SimpleBar from 'simplebar-react'
 import adminNavigatiion from './AdminNav'
 import userNavigation from './UserNav'
-import { NavLink } from 'next/link'
 import 'simplebar/dist/simplebar.min.css'
 import { Avatar } from 'primereact/avatar'
 import { useAuth } from '../context/AuthContext'
@@ -35,14 +34,14 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex pmSystem" to="/">
-        <CNavLink to={userRole === "user" ? '/dashboard-user/employee' : "/dashboard/admin"} component={NavLink} className="d-none d-md-flex">
+      <CSidebarBrand className="d-none d-md-flex" to="/">
+        <a href={userRole === "user" ? '/user/dashboard' : "/admin/dashboard"} className="d-none d-md-flex pmSystem">
           <Avatar
             image='/kr_logo.ico'
             shape="circle"
             className='logo p-1'
           />  PM SYSTEM
-        </CNavLink>
+        </a>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

@@ -7,7 +7,7 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const { auth } = useAuth();
-    console.log("authfromUser---",auth.token)
+    // console.log("authfromUser---",auth.token)
     const headers = {
         Authorization: auth.token
     };
@@ -17,6 +17,7 @@ const UserProvider = ({ children }) => {
         try {
             const res = await axios.get("http://localhost:8080/user/userList", { headers });
             if (res.data.error === false) {
+                console.log(res.data);
                 return res.data
             }
         } catch (error) {
@@ -33,7 +34,7 @@ const UserProvider = ({ children }) => {
             } else {
                 res = await axios.get(`http://localhost:8080/user`, { params: { page, limit, sortField, sortOrder } }, { headers });
             }
-            console.log("ress---",res)
+            console.log("ress---", res)
             if (res.data.error === false) {
                 return res.data
             }
@@ -79,7 +80,7 @@ const UserProvider = ({ children }) => {
     //add user
     const createUser = async (addUser) => {
         try {
-            
+
             const { data } = await axios.post("http://localhost:8080/user/addUser", addUser, { headers });
             if (data.error === false) {
                 fetchUsers()
@@ -107,7 +108,7 @@ const UserProvider = ({ children }) => {
     const updateUser = async (updateUsers, id) => {
         try {
             let { employeeNumber, firstname, lastname, email, phone, address, dateOfBirth, department, dateOfJoining, photo, projects } = updateUsers
-            
+
             const editUser = new FormData()
             editUser.append("employeeNumber", employeeNumber)
             editUser.append("firstname", firstname)

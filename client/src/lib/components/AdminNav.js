@@ -25,12 +25,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Birthday on this Month',
-        to: '/dashboard/user/birtday/list',
+        to: '/admin/user/employeebirthdate',
       },
       {
         component: CNavItem,
         name: 'Create User',
-        to: '/dashboard/user/create',
+        to: '/admin/user/createuser',
       },
     ],
   },
@@ -43,53 +43,53 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Leaves List',
-        to: '/dashboard/leave/list',
+        to: '/admin/leave/list',
       },
       {
         component: CNavItem,
         name: 'Create Leave',
-        to: '/dashboard/leave/create',
+        to: '/admin/leave/createleave',
       },
       {
         component: CNavItem,
         name: 'Manage Leave',
-        to: '/dashboard/leaveManagement/list',
+        to: '/admin/leave/manageleave',
       },
     ],
   },
   {
     component: CNavGroup,
     name: 'Department',
-    to: '/user',
+    to: '/department',
     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Department List',
-        to: '/dashboard/department/list',
+        to: '/admin/department/list',
       },
       {
         component: CNavItem,
         name: 'Create Department',
-        to: '/dashboard/department/create',
+        to: '/admin/department/createdepartment',
       },
     ],
   },
   {
     component: CNavGroup,
     name: 'Project',
-    to: '/user',
+    to: '/project',
     icon: <CIcon icon={cilSpreadsheet} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Project List',
-        to: '/dashboard/project/list',
+        to: '/admin/project/list',
       },
       {
         component: CNavItem,
         name: 'Create Project',
-        to: '/dashboard/project/create',
+        to: '/admin/project/createproject',
       },
     ],
   },
@@ -102,7 +102,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Work Log List',
-        to: '/dashboard/admin/workLog/list',
+        to: '/admin/worklog/list',
       }
     ],
   },

@@ -134,6 +134,8 @@
 .pmSystem {
     font-weight: 700;
     font-size: larger;
+    text-decoration: none;
+    color: white;
 }
 
 .box {
@@ -209,4 +211,8 @@
 
 .p-editor-container .p-editor-toolbar {
     background: #003552bd !important;
+}
+
+.dashboard {
+    text-decoration: none !important;
 }

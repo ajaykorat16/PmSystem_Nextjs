@@ -14,7 +14,7 @@ const ProjectProvider = ({ children }) => {
     //get projects
     const fetchProjects = async () => {
         try {
-            const { data } = await axios.get("/projects/project-list", { headers });
+            const { data } = await axios.get("http://localhost:8080/projects/project-list", { headers });
             if (data.error === false) {
                 return data
             }
@@ -28,9 +28,9 @@ const ProjectProvider = ({ children }) => {
         try {
             let res;
             if (query) {
-                res = await axios.post(`/projects/project-search?page=${page}&limit=${limit}`, { filter: query }, { headers });
+                res = await axios.post(`http://localhost:8080/projects/project-search?page=${page}&limit=${limit}`, { filter: query }, { headers });
             } else {
-                res = await axios.get(`/projects`, { params: { page, limit, sortField, sortOrder } }, { headers });
+                res = await axios.get(`http://localhost:8080/projects`, { params: { page, limit, sortField, sortOrder } }, { headers });
             }
             if (res.data.error === false) {
                 return res.data
@@ -43,7 +43,7 @@ const ProjectProvider = ({ children }) => {
     //get single project
     const getSingleProject = async (id) => {
         try {
-            const { data } = await axios.get(`/projects/single-project/${id}`, { headers });
+            const { data } = await axios.get(`http://localhost:8080/projects/single-project/${id}`, { headers });
             return data
         } catch (error) {
             console.log(error);
@@ -53,7 +53,7 @@ const ProjectProvider = ({ children }) => {
     //add project
     const createProject = async (addUser) => {
         try {
-            const { data } = await axios.post("/projects/create", addUser, { headers });
+            const { data } = await axios.post("http://localhost:8080/projects/create", addUser, { headers });
 
             if (data.error === false) {
                 getProject()
@@ -80,7 +80,7 @@ const ProjectProvider = ({ children }) => {
     //update project
     const updateProject = async (project, id) => {
         try {
-            const { data } = await axios.put(`/projects/update-project/${id}`, project, { headers });
+            const { data } = await axios.put(`http://localhost:8080/projects/update-project/${id}`, project, { headers });
             if (data.error === false) {
                 getProject()
                 setTimeout(function () {
@@ -96,7 +96,7 @@ const ProjectProvider = ({ children }) => {
     //delete project
     const deleteProject = async (id) => {
         try {
-            const { data } = await axios.delete(`/projects/delete-project/${id}`, { headers });
+            const { data } = await axios.delete(`http://localhost:8080/projects/delete-project/${id}`, { headers });
             if (data.error === false) {
                 getProject()
                 toast.success(data.message)
@@ -111,9 +111,9 @@ const ProjectProvider = ({ children }) => {
         try {
             let res;
             if (query) {
-                res = await axios.post(`/projects/search-project-list?page=${page}&limit=${limit}`, { filter: query }, { headers });
+                res = await axios.post(`http://localhost:8080/projects/search-project-list?page=${page}&limit=${limit}`, { filter: query }, { headers });
             } else {
-                res = await axios.get(`/projects/developer-project-list`, { params: { page, limit, sortField, sortOrder } }, { headers });
+                res = await axios.get(`http://localhost:8080/projects/developer-project-list`, { params: { page, limit, sortField, sortOrder } }, { headers });
             }
             if (res.data.error === false) {
                 return res.data
@@ -126,7 +126,7 @@ const ProjectProvider = ({ children }) => {
     //get users project
     const getUserProject = async () => {
         try {
-            const { data } = await axios.get(`/projects/user-project-list`, { headers });
+            const { data } = await axios.get(`http://localhost:8080/projects/user-project-list`, { headers });
             if (data.error === false) {
                 return data
             }

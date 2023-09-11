@@ -16,9 +16,9 @@ const WorklogProvider = ({ children }) => {
         try {
             let res;
             if (query) {
-                res = await axios.post(`/worklog/search-worklog?page=${page}&limit=${limit}`, { filter: query }, { headers });
+                res = await axios.post(`http://localhost:8080/worklog/search-worklog?page=${page}&limit=${limit}`, { filter: query }, { headers });
             } else {
-                res = await axios.get(`/worklog/user-worklog`, { params: { page, limit, sortField, sortOrder } }, { headers });
+                res = await axios.get(`http://localhost:8080/worklog/user-worklog`, { params: { page, limit, sortField, sortOrder } }, { headers });
             }
             if (res.data.error === false) {
                 return res.data
@@ -33,9 +33,9 @@ const WorklogProvider = ({ children }) => {
         try {
             let res;
             if (filter) {
-                res = await axios.post(`/worklog/admin-search-worklog?page=${page}&limit=${limit}`, { filter }, { headers });
+                res = await axios.post(`http://localhost:8080/worklog/admin-search-worklog?page=${page}&limit=${limit}`, { filter }, { headers });
             } else {
-                res = await axios.get(`/worklog`, { params: { page, limit, sortField, sortOrder } }, { headers });
+                res = await axios.get(`http://localhost:8080/worklog`, { params: { page, limit, sortField, sortOrder } }, { headers });
             }
             if (res.data.error === false) {
                 return res.data

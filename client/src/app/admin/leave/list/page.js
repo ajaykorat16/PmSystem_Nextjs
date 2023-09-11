@@ -28,39 +28,42 @@ const LeaveList = ({ title }) => {
     const [id, setId] = useState(null);
     const [reasonForLeaveReject, setReasonForLeaveReject] = useState("")
     const { auth } = useAuth();
-    console.log(auth)
+    // console.log(auth)
     // const router = useRouter()
 
     const fetchLeaves = async (query, sortField, sortOrder) => {
         setIsLoading(true);
         let leaveData;
-        if (auth.user.role === "admin") {
-            leaveData = await getLeave(
-                currentPage,
-                rowsPerPage,
-                query,
-                sortField,
-                sortOrder
-            );
-        } else {
-            leaveData = await getUserLeave(
-                currentPage,
-                rowsPerPage,
-                query,
-                sortField,
-                sortOrder
-            );
-        }
-        console.log("leaveData---",leaveData)
+        if (auth.user !== null) {
+            if (auth.user.role === "admin") {
+                leaveData = await getLeave(
+                    currentPage,
+                    rowsPerPage,
+                    query,
+                    sortField,
+                    sortOrder
+                );
+            } else {
+                leaveData = await getUserLeave(
+                    currentPage,
+                    rowsPerPage,
+                    query,
+                    sortField,
+                    sortOrder
+                );
+            }
+            console.log("leaveData---", leaveData)
 
-        const totalRecordsCount = leaveData.totalLeaves;
-        setTotalRecords(totalRecordsCount);
-        setLeaveList(leaveData.leaves);
-        setIsLoading(false);
-    };
+            const totalRecordsCount = leaveData.totalLeaves;
+            setTotalRecords(totalRecordsCount);
+            setLeaveList(leaveData.leaves);
+            setIsLoading(false);
+        };
+    }
+
     useEffect(() => {
         fetchLeaves();
-    }, [currentPage, rowsPerPage]);
+    }, [currentPage, rowsPerPage, auth]);
 
     const handleSubmit = async () => {
         fetchLeaves(globalFilterValue);
