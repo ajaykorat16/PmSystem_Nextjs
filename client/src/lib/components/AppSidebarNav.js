@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'next/link';
 import PropTypes from 'prop-types';
-import { CBadge } from '@coreui/react';
+import { CBadge, CNavLink } from '@coreui/react';
+import { useRouter } from 'next/navigation';
 
 export const AppSidebarNav = ({ items }) => {
+  const router = useRouter()
   const navLink = (name, icon, badge) => {
     return (
       <>
@@ -19,12 +21,11 @@ export const AppSidebarNav = ({ items }) => {
   };
 
   const navItem = (item, index) => {
-    const { component, name, badge, icon, to } = item;
-    const Component = component || NavLink; 
+    const { name, badge, icon, to } = item;
     return (
-      <Component key={index} href={to}>
+        <CNavLink key={index} onClick={()=>router.push(to)}>
         {navLink(name, icon, badge)}
-      </Component>
+        </CNavLink>
     );
   };
 
