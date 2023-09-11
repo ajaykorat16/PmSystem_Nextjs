@@ -73,7 +73,7 @@ const AppHeaderDropdown = () => {
     }
   }, [getAuth]);
   
-  const redirectPath = auth?.user?.role === "admin" ? `/dashboard/user/admin-profile/${auth?.user?._id}` : `/dashboard-user/user/user-profile/${auth?.user?._id}`;
+  const redirectPath = auth?.user?.role === "admin" ? `/admin/profile/${auth?.user?._id}` : `/user/profile/${auth?.user?._id}`;
 
   return (
     <>
@@ -92,11 +92,11 @@ const AppHeaderDropdown = () => {
           <CDropdownHeader className="bg-light fw-semibold py-2">Settings</CDropdownHeader>
           {getAuth &&
             <>
-              <CDropdownItem onClick={() => navigate(redirectPath)}>
+              <CDropdownItem onClick={() => router.push(redirectPath)}>
                 <CIcon icon={cilUser} className="me-2" />
                 Profile
               </CDropdownItem>
-              <CDropdownItem onClick={() => navigate(`/dashboard-user/user/resetPassword`)}>
+              <CDropdownItem onClick={() => router.push(`/dashboard-user/user/resetPassword`)}>
                 <MdOutlineLockReset className="me-2" fontSize={20} />
                 Reset Password
               </CDropdownItem>
