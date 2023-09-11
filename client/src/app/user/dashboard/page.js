@@ -359,7 +359,7 @@ function page() {
   return (
     <CRow>
       <CCol sm={3}>
-        <CNavLink component={NavLink} to="/dashboard-user/leave/list">
+        <a href="/user/leave/list" className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="primary"
@@ -371,10 +371,10 @@ function page() {
             title="Leave This Month"
             chart={chart1()}
           />
-        </CNavLink>
+        </a>
       </CCol>
       <CCol sm={3}>
-        <CNavLink component={NavLink} to="/dashboard-user/project/list">
+        <a href="/user/project/list" className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="info"
@@ -386,10 +386,10 @@ function page() {
             title="My Projects"
             chart={chart2()}
           />
-        </CNavLink>
+        </a>
       </CCol>
       <CCol sm={3}>
-        <CNavLink component={NavLink} to={userRole === "user" ? "/dashboard-user/employee/birtday/list" : "/dashboard/user/birtday/list"}>
+        <a href="/user/employee/employeebirthdate" className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="warning"
@@ -401,10 +401,10 @@ function page() {
             title="Birthday on this month"
             chart={chart3()}
           />
-        </CNavLink>
+        </a>
       </CCol>
       <CCol sm={3}>
-        <CNavLink component={NavLink} to="/dashboard-user/workLog/list">
+        <a href="/user/worklog/list" className='dashboard'>
           <CWidgetStatsA
             className="mb-4"
             color="danger"
@@ -416,11 +416,10 @@ function page() {
             title="Worklog"
             chart={chart4()}
           />
-        </CNavLink>
+        </a>
       </CCol>
     </CRow>
   )
 }
-
 
 export default page
