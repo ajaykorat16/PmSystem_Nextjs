@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/context/AuthContext";
 import { useProject } from '@/lib/context/ProjectContext';
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react';
 import { ScrollPanel } from 'primereact/scrollpanel';
+import { useRouter } from 'next/navigation';
 import Loader from '@/lib/components/Loader';
 import AdminRoutes from '@/lib/components/Routes/AdminRoutes';
 
@@ -30,7 +31,7 @@ const ProjectList = () => {
         startDate: "",
     });
     const { auth } = useAuth();
-
+    const router = useRouter()
 
     const fetchProjects = async (query, sortField, sortOrder) => {
         setIsLoading(true);
@@ -74,7 +75,7 @@ const ProjectList = () => {
     };
 
     const handleUpdate = async (id) => {
-        // navigate(`/dashboard/project/update/${id}`);
+        router.push(`/admin/project/update/${id}`);
     };
 
     const onPageChange = (event) => {
@@ -107,158 +108,158 @@ const ProjectList = () => {
 
     return (
         <>
-        <AdminRoutes>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <>
-                    <CModal
-                        alignment="center"
-                        visible={visible}
-                        onClose={() => setVisible(false)}
-                        className="mainBody"
-                    >
-                        <CModalHeader>
-                            <CModalTitle>
-                                <strong>{project.name}</strong>
-                            </CModalTitle>
-                        </CModalHeader>
-                        <CModalBody>
-                            <div>
-                                <strong>Developers:</strong>
-                                <p>
-                                    {project.developers}
-                                </p>
-                            </div>
-                            <div className="description">
-                                <strong>Description:</strong>
-                                <ScrollPanel
-                                    className="custom"
-                                >
-                                    <div
-                                        className="description"
-                                        dangerouslySetInnerHTML={{ __html: project.description }}
-                                    />
-                                </ScrollPanel>
-                            </div>
-                            <div className="d-flex justify-content-end ">
-                                <p>
-                                    <strong>{project.startDate}</strong>
-                                </p>
-                            </div>
-                        </CModalBody>
-                        <CModalFooter>
-                            <CButton color="secondary" onClick={() => setVisible(false)}>
-                                Ok
-                            </CButton>
-                        </CModalFooter>
-                    </CModal>
-                    <div className="card mb-5">
-                        <div className="mainHeader d-flex align-items-center justify-content-between">
-                            <div>
-                                <h4>Projects</h4>
-                            </div>
-                            <div>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="p-inputgroup ">
-                                        <span className="p-inputgroup-addon">
-                                            <i className="pi pi-search" />
-                                        </span>
-                                        <InputText
-                                            type="search"
-                                            value={globalFilterValue}
-                                            onChange={(e) => setGlobalFilterValue(e.target.value)}
-                                            placeholder="Keyword Search"
-                                        />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <DataTable
-                            totalRecords={totalRecords}
-                            lazy
-                            paginator
-                            sortField={sortField}
-                            sortOrder={sortOrder}
-                            onSort={hanldeSorting}
-                            rows={rowsPerPage}
-                            value={projectList}
-                            first={(currentPage - 1) * rowsPerPage}
-                            onPage={onPageChange}
-                            dataKey="_id"
-                            emptyMessage="No user found."
-                            paginatorLeft={
-                                <Dropdown
-                                    value={rowsPerPage}
-                                    options={[10, 25, 50]}
-                                    onChange={(e) => setRowsPerPage(e.value)}
-                                />
-                            }
+            <AdminRoutes>
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <CModal
+                            alignment="center"
+                            visible={visible}
+                            onClose={() => setVisible(false)}
+                            className="mainBody"
                         >
-                            <Column
-                                field="name"
-                                header="Name"
-                                filterField="name"
-                                align="center"
-                            />
-                            <Column
-                                header="Developers"
-                                body={(rowData) => {
-                                    const developerNames = rowData.developers.map(
-                                        (developer) => developer.id.fullName
-                                    );
-                                    return developerNames.join(', ');
-                                }}
-                                align="center"
-                                style={{ maxWidth: "15rem" }}
-                            />
-                            <Column
-                                field="startDate"
-                                header="Start Date"
-                                filterField="startDate"
-                                align="center"
-                            />
-                            <Column
-                                field="action"
-                                header="Action"
-                                body={(rowData) => (
-                                    <div>
-                                        <>
-                                            <Button
-                                                icon="pi pi-eye"
-                                                title='View Project'
-                                                rounded
-                                                severity="info"
-                                                aria-label="Cancel"
-                                                onClick={() => handleProjectDetail(rowData)}
+                            <CModalHeader>
+                                <CModalTitle>
+                                    <strong>{project.name}</strong>
+                                </CModalTitle>
+                            </CModalHeader>
+                            <CModalBody>
+                                <div>
+                                    <strong>Developers:</strong>
+                                    <p>
+                                        {project.developers}
+                                    </p>
+                                </div>
+                                <div className="description">
+                                    <strong>Description:</strong>
+                                    <ScrollPanel
+                                        className="custom"
+                                    >
+                                        <div
+                                            className="description"
+                                            dangerouslySetInnerHTML={{ __html: project.description }}
+                                        />
+                                    </ScrollPanel>
+                                </div>
+                                <div className="d-flex justify-content-end ">
+                                    <p>
+                                        <strong>{project.startDate}</strong>
+                                    </p>
+                                </div>
+                            </CModalBody>
+                            <CModalFooter>
+                                <CButton color="secondary" onClick={() => setVisible(false)}>
+                                    Ok
+                                </CButton>
+                            </CModalFooter>
+                        </CModal>
+                        <div className="card mb-5">
+                            <div className="mainHeader d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h4>Projects</h4>
+                                </div>
+                                <div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="p-inputgroup ">
+                                            <span className="p-inputgroup-addon">
+                                                <i className="pi pi-search" />
+                                            </span>
+                                            <InputText
+                                                type="search"
+                                                value={globalFilterValue}
+                                                onChange={(e) => setGlobalFilterValue(e.target.value)}
+                                                placeholder="Keyword Search"
                                             />
-                                            <Button
-                                                icon="pi pi-pencil"
-                                                title='Edit'
-                                                rounded
-                                                severity="success"
-                                                className="ms-2"
-                                                aria-label="edit"
-                                                onClick={() => handleUpdate(rowData._id)}
-                                            />
-                                            <Button
-                                                icon="pi pi-trash"
-                                                title='Delete'
-                                                rounded
-                                                severity="danger"
-                                                className="ms-2"
-                                                aria-label="Cancel"
-                                                onClick={() => handleDelete(rowData._id)}
-                                            />
-                                        </>
-                                    </div>
-                                )}
-                                align="center"
-                            />
-                        </DataTable>
-                    </div>
-                </>
-            )}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <DataTable
+                                totalRecords={totalRecords}
+                                lazy
+                                paginator
+                                sortField={sortField}
+                                sortOrder={sortOrder}
+                                onSort={hanldeSorting}
+                                rows={rowsPerPage}
+                                value={projectList}
+                                first={(currentPage - 1) * rowsPerPage}
+                                onPage={onPageChange}
+                                dataKey="_id"
+                                emptyMessage="No user found."
+                                paginatorLeft={
+                                    <Dropdown
+                                        value={rowsPerPage}
+                                        options={[10, 25, 50]}
+                                        onChange={(e) => setRowsPerPage(e.value)}
+                                    />
+                                }
+                            >
+                                <Column
+                                    field="name"
+                                    header="Name"
+                                    filterField="name"
+                                    align="center"
+                                />
+                                <Column
+                                    header="Developers"
+                                    body={(rowData) => {
+                                        const developerNames = rowData.developers.map(
+                                            (developer) => developer.id.fullName
+                                        );
+                                        return developerNames.join(', ');
+                                    }}
+                                    align="center"
+                                    style={{ maxWidth: "15rem" }}
+                                />
+                                <Column
+                                    field="startDate"
+                                    header="Start Date"
+                                    filterField="startDate"
+                                    align="center"
+                                />
+                                <Column
+                                    field="action"
+                                    header="Action"
+                                    body={(rowData) => (
+                                        <div>
+                                            <>
+                                                <Button
+                                                    icon="pi pi-eye"
+                                                    title='View Project'
+                                                    rounded
+                                                    severity="info"
+                                                    aria-label="Cancel"
+                                                    onClick={() => handleProjectDetail(rowData)}
+                                                />
+                                                <Button
+                                                    icon="pi pi-pencil"
+                                                    title='Edit'
+                                                    rounded
+                                                    severity="success"
+                                                    className="ms-2"
+                                                    aria-label="edit"
+                                                    onClick={() => handleUpdate(rowData._id)}
+                                                />
+                                                <Button
+                                                    icon="pi pi-trash"
+                                                    title='Delete'
+                                                    rounded
+                                                    severity="danger"
+                                                    className="ms-2"
+                                                    aria-label="Cancel"
+                                                    onClick={() => handleDelete(rowData._id)}
+                                                />
+                                            </>
+                                        </div>
+                                    )}
+                                    align="center"
+                                />
+                            </DataTable>
+                        </div>
+                    </>
+                )}
             </AdminRoutes>
         </>
     )

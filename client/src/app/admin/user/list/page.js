@@ -68,7 +68,7 @@ function Page() {
   };
 
   const handleUpdate = async (id) => {
-    router.push(`/dashboard/user/update/${id}`);
+    router.push(`/admin/user/update/${id}`);
   };
 
   const onPageChange = (event) => {
@@ -88,155 +88,156 @@ function Page() {
 
   return (
     <>
-    <AdminRoutes>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="card mb-5">
-            <div className="mainHeader d-flex align-items-center justify-content-between">
-              <div>
-                <h4>Users</h4>
+      <AdminRoutes>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="card mb-5">
+              <div className="mainHeader d-flex align-items-center justify-content-between">
+                <div>
+                  <h4>Users</h4>
+                </div>
+                <div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="p-inputgroup ">
+                      <span className="p-inputgroup-addon">
+                        <i className="pi pi-search" />
+                      </span>
+                      <InputText
+                        type="search"
+                        value={globalFilterValue}
+                        onChange={(e) => setGlobalFilterValue(e.target.value)}
+                        placeholder="Keyword Search"
+                      />
+                    </div>
+                  </form>
+                </div>
               </div>
-              <div>
-                <form onSubmit={handleSubmit}>
-                  <div className="p-inputgroup ">
-                    <span className="p-inputgroup-addon">
-                      <i className="pi pi-search" />
-                    </span>
-                    <InputText
-                      type="search"
-                      value={globalFilterValue}
-                      onChange={(e) => setGlobalFilterValue(e.target.value)}
-                      placeholder="Keyword Search"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-            <DataTable
-              totalRecords={totalRecords}
-              lazy
-              paginator
-              sortField={sortField}
-              sortOrder={sortOrder}
-              onSort={hanldeSorting}
-              rows={rowsPerPage}
-              value={userList}
-              first={(currentPage - 1) * rowsPerPage}
-              onPage={onPageChange}
-              dataKey="_id"
-              emptyMessage="No user found."
-              paginatorLeft={
-                <Dropdown
-                  value={rowsPerPage}
-                  options={[10, 25, 50]}
-                  onChange={(e) => setRowsPerPage(e.value)}
+              <DataTable
+                totalRecords={totalRecords}
+                lazy
+                paginator
+                sortField={sortField}
+                sortOrder={sortOrder}
+                onSort={hanldeSorting}
+                rows={rowsPerPage}
+                value={userList}
+                first={(currentPage - 1) * rowsPerPage}
+                onPage={onPageChange}
+                dataKey="_id"
+                emptyMessage="No user found."
+                paginatorLeft={
+                  <Dropdown
+                    value={rowsPerPage}
+                    options={[10, 25, 50]}
+                    onChange={(e) => setRowsPerPage(e.value)}
+                  />
+                }
+              >
+                <Column
+                  header="#"
+                  filterField="representative"
+                  body={(rowData) => (
+                    <div className="flex align-items-center gap-2">
+                      {rowData.photo ? (
+                        <Avatar
+                          image={`${rowData.photo}`}
+                          size="large"
+                          shape="circle"
+                        />
+                      ) : (
+                        <Avatar
+                          icon="pi pi-user"
+                          style={{ backgroundColor: "#2196F3", color: "#ffffff" }}
+                          size="large"
+                          shape="circle"
+                        />
+                      )}
+                    </div>
+                  )}
+                  align="center"
                 />
-              }
-            >
-              <Column
-                header="#"
-                filterField="representative"
-                body={(rowData) => (
-                  <div className="flex align-items-center gap-2">
-                    {rowData.photo ? (
-                      <Avatar
-                        image={`${rowData.photo}`}
-                        size="large"
-                        shape="circle"
-                      />
-                    ) : (
-                      <Avatar
-                        icon="pi pi-user"
-                        style={{ backgroundColor: "#2196F3", color: "#ffffff" }}
-                        size="large"
-                        shape="circle"
-                      />
-                    )}
-                  </div>
-                )}
-                align="center"
-              />
-              <Column
-                field="employeeNumber"
-                header="Emp. ID."
-                sortable
-                filterField="employeeNumber"
-                align="center"
-              />
-              <Column
-                field="fullName"
-                sortable
-                header="Name"
-                filterField="firstname"
-                align="center"
-              />
-              <Column
-                field="email"
-                sortable
-                header="Email"
-                filterField="email"
-                align="center"
-              />
-              <Column
-                field="phone"
-                header="Phone"
-                filterField="phone"
-                align="center"
-              />
-              <Column
-                field="dateOfBirth"
-                header="DOB"
-                filterField="dateOfBirth"
-                align="center"
-              />
-              <Column
-                field="dateOfJoining"
-                header="DOJ"
-                filterField="dateOfJoining"
-                align="center"
-              />
-              <Column
-                field="department"
-                header="Department"
-                filterField="department"
-                align="center"
-              />
-              <Column
-                field="action"
-                header="Action"
-                body={(rowData) => (
-                  <div>
-                    {rowData.role === "user" && (
-                      <>
-                        <Button
-                          icon="pi pi-pencil"
-                          title="Edit"
-                          rounded
-                          severity="success"
-                          aria-label="edit"
-                          onClick={() => handleUpdate(rowData._id)}
-                        />
-                        <Button
-                          icon="pi pi-trash"
-                          title="Delete"
-                          rounded
-                          severity="danger"
-                          className="ms-2"
-                          aria-label="Cancel"
-                          onClick={() => handleDelete(rowData._id)}
-                        />
-                      </>
-                    )}
-                  </div>
-                )}
-                align="center"
-              />
-            </DataTable>
-          </div>
-        </>)}
-        </AdminRoutes>
+                <Column
+                  field="employeeNumber"
+                  header="Emp. ID."
+                  sortable
+                  filterField="employeeNumber"
+                  align="center"
+                />
+                <Column
+                  field="fullName"
+                  sortable
+                  header="Name"
+                  filterField="firstname"
+                  align="center"
+                />
+                <Column
+                  field="email"
+                  sortable
+                  header="Email"
+                  filterField="email"
+                  align="center"
+                />
+                <Column
+                  field="phone"
+                  header="Phone"
+                  filterField="phone"
+                  align="center"
+                />
+                <Column
+                  field="dateOfBirth"
+                  header="DOB"
+                  filterField="dateOfBirth"
+                  align="center"
+                />
+                <Column
+                  field="dateOfJoining"
+                  header="DOJ"
+                  filterField="dateOfJoining"
+                  align="center"
+                />
+                <Column
+                  field="department"
+                  header="Department"
+                  filterField="department"
+                  align="center"
+                />
+                <Column
+                  field="action"
+                  header="Action"
+                  body={(rowData) => (
+                    <div>
+                      {rowData.role === "user" && (
+                        <>
+                          <Button
+                            icon="pi pi-pencil"
+                            title="Edit"
+                            rounded
+                            severity="success"
+                            aria-label="edit"
+                            onClick={() => handleUpdate(rowData._id)}
+                          />
+                          <Button
+                            icon="pi pi-trash"
+                            title="Delete"
+                            rounded
+                            severity="danger"
+                            className="ms-2"
+                            aria-label="Cancel"
+                            onClick={() => handleDelete(rowData._id)}
+                          />
+                        </>
+                      )}
+                    </div>
+                  )}
+                  align="center"
+                />
+              </DataTable>
+            </div>
+          </>
+        )}
+      </AdminRoutes>
     </>
   );
 }

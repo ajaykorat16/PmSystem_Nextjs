@@ -11,7 +11,7 @@ import { CButton, CForm, CFormTextarea, CModal, CModalBody, CModalFooter, CModal
 import { useAuth } from "@/lib/context/AuthContext";
 import { useLeave } from "@/lib/context/LeaveContext";
 import Loader from "@/lib/components/Loader";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const LeaveList = ({ title }) => {
@@ -29,8 +29,7 @@ const LeaveList = ({ title }) => {
     const [id, setId] = useState(null);
     const [reasonForLeaveReject, setReasonForLeaveReject] = useState("")
     const { auth } = useAuth();
-    // console.log(auth)
-    // const router = useRouter()
+    const router = useRouter()
 
     const fetchLeaves = async (query, sortField, sortOrder) => {
         setIsLoading(true);
@@ -53,8 +52,6 @@ const LeaveList = ({ title }) => {
                     sortOrder
                 );
             }
-            console.log("leaveData---", leaveData)
-
             const totalRecordsCount = leaveData.totalLeaves;
             setTotalRecords(totalRecordsCount);
             setLeaveList(leaveData.leaves);
@@ -77,7 +74,7 @@ const LeaveList = ({ title }) => {
     }, [globalFilterValue]);
 
     const handleUpdate = async (id) => {
-        // router.push(`/dashboard/leave/update/${id}`);
+        router.push(`/admin/leave/update/${id}`);
     };
 
     const handleUpdateStatus = async (id, status, fullName) => {
@@ -141,191 +138,190 @@ const LeaveList = ({ title }) => {
 
     return (
         <>
-        <AdminRoutes>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <>
-                    <CModal
-                        alignment="center"
-                        visible={visible}
-                        onClose={() => setVisible(false)}
-                    >
-                        <CModalHeader>
-                            <CModalTitle>{fullName}</CModalTitle>
-                        </CModalHeader>
-                        <CForm onSubmit={handleUpdateStatus}>
-                            <CModalBody>
-                                <CFormTextarea
-                                    type="text"
-                                    id="leave"
-                                    label="Rasone For Reject Leave"
-                                    value={reasonForLeaveReject}
-                                    onChange={(e) => setReasonForLeaveReject(e.target.value)}
-                                    rows={3}
-                                />
-                            </CModalBody>
-                            <CModalFooter>
-                                <CButton color="secondary" onClick={() => setVisible(false)}>
-                                    Close
-                                </CButton>
-                                <CButton color="primary" onClick={() => handleSubmitReject()}>Save changes</CButton>
-                            </CModalFooter>
-                        </CForm>
-                    </CModal>
-                    <div className="card mb-5">
-                        <div className="mainHeader d-flex align-items-center justify-content-between">
-                            <div>
-                                <h4>Leaves</h4>
-                            </div>
-                            <div>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="p-inputgroup ">
-                                        <span className="p-inputgroup-addon">
-                                            <i className="pi pi-search" />
-                                        </span>
-                                        <InputText
-                                            type="search"
-                                            value={globalFilterValue}
-                                            onChange={(e) => setGlobalFilterValue(e.target.value)}
-                                            placeholder="Keyword Search"
-                                        />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <DataTable
-                            totalRecords={totalRecords}
-                            lazy
-                            className="text-center"
-                            paginator
-                            sortField={sortField}
-                            sortOrder={sortOrder}
-                            onSort={hanldeSorting}
-                            rows={rowsPerPage}
-                            value={leaveList}
-                            first={(currentPage - 1) * rowsPerPage}
-                            onPage={onPageChange}
-                            dataKey="_id"
-                            emptyMessage="No leave found."
-                            paginatorLeft={
-                                <Dropdown
-                                    value={rowsPerPage}
-                                    options={[10, 25, 50]}
-                                    onChange={(e) => setRowsPerPage(e.value)}
-                                />
-                            }
+            <AdminRoutes>
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <CModal
+                            alignment="center"
+                            visible={visible}
+                            onClose={() => setVisible(false)}
                         >
-                            {auth.user.role === "admin" && (
-                                <Column
-                                    field="userId.fullName"
-                                    sortable
-                                    header="Name"
-                                    filterField="name"
-                                    align="center"
-                                />
-                            )}
-                            <Column
-                                field="reason"
-                                header="Reason"
-                                filterField="reason"
-                                alignHeader="center"
-                                style={{ minWidth: "15rem", maxWidth: "15rem" }}
-                            />
-                            <Column
-                                field="reasonForLeaveReject"
-                                header="Reason For Leave Reject"
-                                filterField="reason"
-                                alignHeader="center"
-                                style={{ minWidth: "15rem", maxWidth: "15rem" }}
-                            />
-                            <Column
-                                field="startDate"
-                                header="Start Date"
-                                sortable
-                                filterField="start"
-                                align="center"
-                            />
-                            <Column
-                                field="endDate"
-                                header="End Date"
-                                filterField="end"
-                                align="center"
-                            />
-                            <Column
-                                field="totalDays"
-                                header="Days"
-                                filterField="days"
-                                align="center"
-                            />
-                            <Column
-                                field="type"
-                                header="Type"
-                                filterField="type"
-                                align="center"
-                            />
-                            <Column
-                                header="Status"
-                                alignHeader="center"
-                                body={(rowData) => (
-                                    <Tag
-                                        value={rowData.status}
-                                        severity={getSeverity(rowData.status)}
+                            <CModalHeader>
+                                <CModalTitle>{fullName}</CModalTitle>
+                            </CModalHeader>
+                            <CForm onSubmit={handleUpdateStatus}>
+                                <CModalBody>
+                                    <CFormTextarea
+                                        type="text"
+                                        id="leave"
+                                        label="Rasone For Reject Leave"
+                                        value={reasonForLeaveReject}
+                                        onChange={(e) => setReasonForLeaveReject(e.target.value)}
+                                        rows={3}
                                     />
-                                )}
-                                filterField="status"
-                                align="center"
-                            />
-                            {auth.user.role === "admin" && (
-                                <Column
-                                    header="Action"
-                                    body={(rowData) => (
-                                        <div>
-                                            {rowData.status === "Pending" && (
-                                                <>
-                                                    <Button
-                                                        icon="pi pi-check"
-                                                        title="Approve"
-                                                        rounded
-                                                        severity="success"
-                                                        onClick={() => handleUpdateStatus(rowData._id, "approved")}
-                                                        raised
-                                                    />
-                                                    <Button
-                                                        icon="pi pi-times"
-                                                        title="Reject"
-                                                        rounded
-                                                        severity="danger"
-                                                        onClick={() => handleUpdateStatus(rowData._id, "rejected", rowData.userId.fullName)}
-                                                        className="ms-2"
-                                                        raised
-                                                    />
-                                                </>
-                                            )}
-                                            <Button
-                                                icon="pi pi-pencil"
-                                                rounded
-                                                severity="info"
-                                                className="ms-2"
-                                                title="Edit"
-                                                onClick={() => handleUpdate(rowData._id)}
-                                                raised
-                                                disabled={rowData.status === "Approved" || rowData.status === "Rejected"}
+                                </CModalBody>
+                                <CModalFooter>
+                                    <CButton color="secondary" onClick={() => setVisible(false)}>
+                                        Close
+                                    </CButton>
+                                    <CButton color="primary" onClick={() => handleSubmitReject()}>Save changes</CButton>
+                                </CModalFooter>
+                            </CForm>
+                        </CModal>
+                        <div className="card mb-5">
+                            <div className="mainHeader d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h4>Leaves</h4>
+                                </div>
+                                <div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="p-inputgroup ">
+                                            <span className="p-inputgroup-addon">
+                                                <i className="pi pi-search" />
+                                            </span>
+                                            <InputText
+                                                type="search"
+                                                value={globalFilterValue}
+                                                onChange={(e) => setGlobalFilterValue(e.target.value)}
+                                                placeholder="Keyword Search"
                                             />
                                         </div>
-                                    )}
-                                    align="right"
+                                    </form>
+                                </div>
+                            </div>
+                            <DataTable
+                                totalRecords={totalRecords}
+                                lazy
+                                className="text-center"
+                                paginator
+                                sortField={sortField}
+                                sortOrder={sortOrder}
+                                onSort={hanldeSorting}
+                                rows={rowsPerPage}
+                                value={leaveList}
+                                first={(currentPage - 1) * rowsPerPage}
+                                onPage={onPageChange}
+                                dataKey="_id"
+                                emptyMessage="No leave found."
+                                paginatorLeft={
+                                    <Dropdown
+                                        value={rowsPerPage}
+                                        options={[10, 25, 50]}
+                                        onChange={(e) => setRowsPerPage(e.value)}
+                                    />
+                                }
+                            >
+                                {auth.user.role === "admin" && (
+                                    <Column
+                                        field="userId.fullName"
+                                        sortable
+                                        header="Name"
+                                        filterField="name"
+                                        align="center"
+                                    />
+                                )}
+                                <Column
+                                    field="reason"
+                                    header="Reason"
+                                    filterField="reason"
                                     alignHeader="center"
-                                    style={{ maxWidth: "8rem" }}
+                                    style={{ minWidth: "15rem", maxWidth: "15rem" }}
                                 />
-                            )}
-                        </DataTable>
-                    </div>
-                </>
-            )}
+                                <Column
+                                    field="reasonForLeaveReject"
+                                    header="Reason For Leave Reject"
+                                    filterField="reason"
+                                    alignHeader="center"
+                                    style={{ minWidth: "15rem", maxWidth: "15rem" }}
+                                />
+                                <Column
+                                    field="startDate"
+                                    header="Start Date"
+                                    sortable
+                                    filterField="start"
+                                    align="center"
+                                />
+                                <Column
+                                    field="endDate"
+                                    header="End Date"
+                                    filterField="end"
+                                    align="center"
+                                />
+                                <Column
+                                    field="totalDays"
+                                    header="Days"
+                                    filterField="days"
+                                    align="center"
+                                />
+                                <Column
+                                    field="type"
+                                    header="Type"
+                                    filterField="type"
+                                    align="center"
+                                />
+                                <Column
+                                    header="Status"
+                                    alignHeader="center"
+                                    body={(rowData) => (
+                                        <Tag
+                                            value={rowData.status}
+                                            severity={getSeverity(rowData.status)}
+                                        />
+                                    )}
+                                    filterField="status"
+                                    align="center"
+                                />
+                                {auth.user.role === "admin" && (
+                                    <Column
+                                        header="Action"
+                                        body={(rowData) => (
+                                            <div>
+                                                {rowData.status === "Pending" && (
+                                                    <>
+                                                        <Button
+                                                            icon="pi pi-check"
+                                                            title="Approve"
+                                                            rounded
+                                                            severity="success"
+                                                            onClick={() => handleUpdateStatus(rowData._id, "approved")}
+                                                            raised
+                                                        />
+                                                        <Button
+                                                            icon="pi pi-times"
+                                                            title="Reject"
+                                                            rounded
+                                                            severity="danger"
+                                                            onClick={() => handleUpdateStatus(rowData._id, "rejected", rowData.userId.fullName)}
+                                                            className="ms-2"
+                                                            raised
+                                                        />
+                                                    </>
+                                                )}
+                                                <Button
+                                                    icon="pi pi-pencil"
+                                                    rounded
+                                                    severity="info"
+                                                    className="ms-2"
+                                                    title="Edit"
+                                                    onClick={() => handleUpdate(rowData._id)}
+                                                    raised
+                                                    disabled={rowData.status === "Approved" || rowData.status === "Rejected"}
+                                                />
+                                            </div>
+                                        )}
+                                        align="right"
+                                        alignHeader="center"
+                                        style={{ maxWidth: "8rem" }}
+                                    />
+                                )}
+                            </DataTable>
+                        </div>
+                    </>
+                )}
             </AdminRoutes>
         </>
-
     );
 };
 

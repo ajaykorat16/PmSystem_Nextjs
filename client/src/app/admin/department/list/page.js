@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/context/AuthContext";
 import { useDepartment } from '@/lib/context/DepartmentContext';
 import Loader from '@/lib/components/Loader';
 import AdminRoutes from '@/lib/components/Routes/AdminRoutes';
+import { useRouter } from 'next/navigation';
 
 const DepartmentList = () => {
     const { getDepartment, deleteDepartment } = useDepartment();
@@ -21,6 +22,7 @@ const DepartmentList = () => {
     const [sortField, setSortField] = useState('createdAt');
     const [sortOrder, setSortOrder] = useState(-1);
     const { auth } = useAuth();
+    const router = useRouter()
 
     const fetchDepartments = async (query, sortField, sortOrder) => {
         setIsLoading(true);
@@ -61,7 +63,7 @@ const DepartmentList = () => {
     };
 
     const handleUpdate = async (id) => {
-        // navigate(`/dashboard/department/update/${id}`);
+        router.push(`/admin/department/update/${id}`)
     };
 
     const onPageChange = (event) => {
@@ -82,76 +84,76 @@ const DepartmentList = () => {
 
     return (
         <>
-        <AdminRoutes>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <>
-                    <div className="card mb-5">
-                        <div className="mainHeader d-flex align-items-center justify-content-between">
-                            <div>
-                                <h4>Departments</h4>
+            <AdminRoutes>
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <div className="card mb-5">
+                            <div className="mainHeader d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h4>Departments</h4>
+                                </div>
+                                <div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="p-inputgroup ">
+                                            <span className="p-inputgroup-addon">
+                                                <i className="pi pi-search" />
+                                            </span>
+                                            <InputText
+                                                type='search'
+                                                value={globalFilterValue}
+                                                onChange={(e) => setGlobalFilterValue(e.target.value)}
+                                                placeholder="Keyword Search"
+                                            />
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="p-inputgroup ">
-                                        <span className="p-inputgroup-addon">
-                                            <i className="pi pi-search" />
-                                        </span>
-                                        <InputText
-                                            type='search'
-                                            value={globalFilterValue}
-                                            onChange={(e) => setGlobalFilterValue(e.target.value)}
-                                            placeholder="Keyword Search"
-                                        />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <DataTable
-                            totalRecords={totalRecords}
-                            lazy
-                            sortField={sortField}
-                            sortOrder={sortOrder}
-                            onSort={handleSorting}
-                            paginator
-                            rows={rowsPerPage}
-                            value={departmentList}
-                            first={(currentPage - 1) * rowsPerPage}
-                            onPage={onPageChange}
-                            dataKey="_id"
-                            emptyMessage="No departments found."
-                            paginatorLeft={
-                                <Dropdown
-                                    value={rowsPerPage}
-                                    options={[10, 25, 50]}
-                                    onChange={(e) => setRowsPerPage(e.value)}
+                            <DataTable
+                                totalRecords={totalRecords}
+                                lazy
+                                sortField={sortField}
+                                sortOrder={sortOrder}
+                                onSort={handleSorting}
+                                paginator
+                                rows={rowsPerPage}
+                                value={departmentList}
+                                first={(currentPage - 1) * rowsPerPage}
+                                onPage={onPageChange}
+                                dataKey="_id"
+                                emptyMessage="No departments found."
+                                paginatorLeft={
+                                    <Dropdown
+                                        value={rowsPerPage}
+                                        options={[10, 25, 50]}
+                                        onChange={(e) => setRowsPerPage(e.value)}
+                                    />
+                                }
+                            >
+                                <Column
+                                    field="name"
+                                    header="Name"
+                                    sortable
+                                    filterField="name"
+                                    filterMenuStyle={{ width: '14rem' }}
+                                    style={{ minWidth: '12rem' }}
                                 />
-                            }
-                        >
-                            <Column
-                                field="name"
-                                header="Name"
-                                sortable
-                                filterField="name"
-                                filterMenuStyle={{ width: '14rem' }}
-                                style={{ minWidth: '12rem' }}
-                            />
-                            <Column
-                                field="action"
-                                header="Action"
-                                body={(rowData) => (
-                                    <div>
-                                        <Button icon="pi pi-pencil" title='Edit' rounded severity="success" aria-label="edit" onClick={() => handleUpdate(rowData._id)} />
-                                        <Button icon="pi pi-trash" title='Delete' rounded severity="danger" className="ms-2" aria-label="Cancel" onClick={() => handleDelete(rowData._id)} />
-                                    </div>
-                                )}
-                                style={{ width: '8rem' }}
-                            />
-                        </DataTable>
-                    </div>
-                </>
-            )}
+                                <Column
+                                    field="action"
+                                    header="Action"
+                                    body={(rowData) => (
+                                        <div>
+                                            <Button icon="pi pi-pencil" title='Edit' rounded severity="success" aria-label="edit" onClick={() => handleUpdate(rowData._id)} />
+                                            <Button icon="pi pi-trash" title='Delete' rounded severity="danger" className="ms-2" aria-label="Cancel" onClick={() => handleDelete(rowData._id)} />
+                                        </div>
+                                    )}
+                                    style={{ width: '8rem' }}
+                                />
+                            </DataTable>
+                        </div>
+                    </>
+                )}
             </AdminRoutes>
         </>
     );
