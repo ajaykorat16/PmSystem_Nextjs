@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/UserContext";
 import { useAuth } from "@/lib/context/AuthContext";
 import Loader from "@/lib/components/Loader";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 function Page() {
   const { deleteUser, getAllUsers } = useUser();
@@ -87,6 +88,7 @@ function Page() {
 
   return (
     <>
+    <AdminRoutes>
       {isLoading ? (
         <Loader />
       ) : (
@@ -234,6 +236,7 @@ function Page() {
             </DataTable>
           </div>
         </>)}
+        </AdminRoutes>
     </>
   );
 }

@@ -12,6 +12,7 @@ import { useAuth } from "@/lib/context/AuthContext";
 import { useLeave } from "@/lib/context/LeaveContext";
 import Loader from "@/lib/components/Loader";
 import { useRouter } from "next/router";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const LeaveList = ({ title }) => {
     const { getLeave, getUserLeave, updateStatus } = useLeave();
@@ -140,6 +141,7 @@ const LeaveList = ({ title }) => {
 
     return (
         <>
+        <AdminRoutes>
             {isLoading ? (
                 <Loader />
             ) : (
@@ -321,6 +323,7 @@ const LeaveList = ({ title }) => {
                     </div>
                 </>
             )}
+            </AdminRoutes>
         </>
 
     );

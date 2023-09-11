@@ -8,6 +8,7 @@ import toast from "react-hot-toast"
 import { Calendar } from 'primereact/calendar';
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/context/AuthContext";
+import AdminRoutes from '@/lib/components/Routes/AdminRoutes';
 
 const UserCreate = () => {
     const [employeeNumber, setEmployeeNumber] = useState("")
@@ -59,6 +60,8 @@ const UserCreate = () => {
     }, [auth])
 
     return (
+        <>
+         <AdminRoutes>
         <div>
             <div className="mb-3">
                 <h2 className='mb-5 mt-2'>Create User</h2>
@@ -124,6 +127,8 @@ const UserCreate = () => {
                 </CCol>
             </CForm>
         </div>
+        </AdminRoutes>
+        </>
 
     )
 }

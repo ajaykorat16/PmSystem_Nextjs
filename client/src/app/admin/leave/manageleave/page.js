@@ -10,6 +10,7 @@ import { CButton, CForm, CFormInput, CFormSelect, CModal, CModalBody, CModalFoot
 import { useUser } from "@/lib/context/UserContext";
 import { toast } from "react-hot-toast";
 import { useAuth } from "@/lib/context/AuthContext";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const LeaveManagementList = () => {
     const { getLeavesMonthWise, getSingleLeave, updateLeave, createLeave } = useLeaveManagement();
@@ -148,6 +149,7 @@ const LeaveManagementList = () => {
 
     return (
         <>
+        <AdminRoutes>
             {isLoading ? (
                 <Loader />
             ) : (
@@ -327,6 +329,7 @@ const LeaveManagementList = () => {
                     </div>
                 </>
             )}
+            </AdminRoutes>
         </>
     );
 };

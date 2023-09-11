@@ -13,6 +13,7 @@ import Loader from "@/lib/components/Loader";
 // import "../styles/Styles.css";
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, } from "@coreui/react";
 import { ScrollPanel } from "primereact/scrollpanel";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 function AdminWorkLogList() {
     const { getAdminWorklog } = useWorklog();
@@ -125,6 +126,7 @@ function AdminWorkLogList() {
 
     return (
         <>
+        <AdminRoutes>
             {isLoading ? (
                 <Loader />
             ) : (
@@ -290,6 +292,7 @@ function AdminWorkLogList() {
                     </div>
                 </>
             )}
+            </AdminRoutes>
         </>
     );
 }

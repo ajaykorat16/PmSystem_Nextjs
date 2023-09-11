@@ -8,6 +8,7 @@ import { Button } from 'primereact/button';
 import { useAuth } from "@/lib/context/AuthContext";
 import { useDepartment } from '@/lib/context/DepartmentContext';
 import Loader from '@/lib/components/Loader';
+import AdminRoutes from '@/lib/components/Routes/AdminRoutes';
 
 const DepartmentList = () => {
     const { getDepartment, deleteDepartment } = useDepartment();
@@ -81,6 +82,7 @@ const DepartmentList = () => {
 
     return (
         <>
+        <AdminRoutes>
             {isLoading ? (
                 <Loader />
             ) : (
@@ -150,6 +152,7 @@ const DepartmentList = () => {
                     </div>
                 </>
             )}
+            </AdminRoutes>
         </>
     );
 };

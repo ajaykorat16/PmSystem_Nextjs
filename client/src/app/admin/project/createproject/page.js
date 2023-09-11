@@ -9,6 +9,7 @@ import { Editor } from 'primereact/editor';
 import { toast } from "react-hot-toast";
 import { Calendar } from "primereact/calendar";
 import { useRouter } from "next/navigation";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const ProjectCreate = () => {
     const { fetchUsers, auth } = useUser();
@@ -47,6 +48,7 @@ const ProjectCreate = () => {
 
     return (
         <>
+        <AdminRoutes>
             <div className="mb-3">
                 <h2 className="mb-5 mt-2">Create Project</h2>
             </div>
@@ -94,6 +96,7 @@ const ProjectCreate = () => {
                     <CButton type="submit">Submit</CButton>
                 </CCol>
             </CForm>
+         </AdminRoutes>
         </>
     );
 };

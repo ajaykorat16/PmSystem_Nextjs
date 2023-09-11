@@ -10,6 +10,7 @@ import { useProject } from '@/lib/context/ProjectContext';
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react';
 import { ScrollPanel } from 'primereact/scrollpanel';
 import Loader from '@/lib/components/Loader';
+import AdminRoutes from '@/lib/components/Routes/AdminRoutes';
 
 const ProjectList = () => {
     const { getProject, deleteProject } = useProject()
@@ -106,6 +107,7 @@ const ProjectList = () => {
 
     return (
         <>
+        <AdminRoutes>
             {isLoading ? (
                 <Loader />
             ) : (
@@ -257,6 +259,7 @@ const ProjectList = () => {
                     </div>
                 </>
             )}
+            </AdminRoutes>
         </>
     )
 }

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/lib/context/AuthContext";
 import { Calendar } from "primereact/calendar";
 import { useRouter } from "next/navigation";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const LeaveCreate = () => {
     const [users, setUsers] = useState([]);
@@ -91,6 +92,7 @@ const LeaveCreate = () => {
 
     return (
         <>
+        <AdminRoutes>
             <div className="mb-3">
                 <h2 className="mb-5 mt-2">Create Leave</h2>
             </div>
@@ -201,6 +203,7 @@ const LeaveCreate = () => {
                     </CButton>
                 </CCol>
             </CForm>
+        </AdminRoutes>
         </>
     );
 };

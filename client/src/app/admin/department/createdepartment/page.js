@@ -4,6 +4,7 @@ import { CCol, CFormInput, CButton, CForm } from "@coreui/react";
 import { useDepartment } from "@/lib/context/DepartmentContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const DepartmentCreate = ({ title }) => {
     const [name, setName] = useState("");
@@ -26,21 +27,23 @@ const DepartmentCreate = ({ title }) => {
 
     return (
         <>
-            <div className="mb-3">
-                <h2 className="mb-5 mt-2">Create Department</h2>
-            </div>
-            <CForm className="row g-3" onSubmit={handleSubmit}>
-                <CCol sm={12}>
-                    <CFormInput
-                        placeholder="Department"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </CCol>
-                <CCol xs="auto">
-                    <CButton type="submit">Submit</CButton>
-                </CCol>
-            </CForm>
+            <AdminRoutes>
+                <div className="mb-3">
+                    <h2 className="mb-5 mt-2">Create Department</h2>
+                </div>
+                <CForm className="row g-3" onSubmit={handleSubmit}>
+                    <CCol sm={12}>
+                        <CFormInput
+                            placeholder="Department"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </CCol>
+                    <CCol xs="auto">
+                        <CButton type="submit">Submit</CButton>
+                    </CCol>
+                </CForm>
+            </AdminRoutes>
         </>
     );
 };

@@ -10,6 +10,7 @@ import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
 // import "../styles/Styles.css";
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
+import AdminRoutes from "@/lib/components/Routes/AdminRoutes";
 
 const EmployeeByBirthMonth = () => {
     const { getAllUsersByBirthMonth } = useUser();
@@ -90,6 +91,7 @@ const EmployeeByBirthMonth = () => {
 
     return (
         <>
+        <AdminRoutes>
             {isLoading ? (
                 <Loader />
             ) : (
@@ -272,6 +274,7 @@ const EmployeeByBirthMonth = () => {
                     </div>
                 </>
             )}
+            </AdminRoutes>
         </>
     );
 };
