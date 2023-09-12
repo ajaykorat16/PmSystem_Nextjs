@@ -15,11 +15,13 @@ import toast from "react-hot-toast"
 import { useRouter } from "next/navigation";
 import { useUser } from '@/lib/context/UserContext'
 import AdminRoutes from '@/lib/components/Routes/AdminRoutes'
+import { useAuth } from '@/lib/context/AuthContext'
 
 const Login = ({ title }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const { resetPassword } = useUser()
+    const { logout } = useAuth();
     const router = useRouter()
 
     const handleSubmit = async (e) => {
@@ -32,7 +34,8 @@ const Login = ({ title }) => {
                 if (data.error) {
                     toast.error(data.message)
                 } else {
-                    router.push("/")
+                    logout();
+                    router.push("/");
                 }
             }
         } catch (error) {

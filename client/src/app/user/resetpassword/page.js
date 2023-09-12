@@ -15,11 +15,13 @@ import toast from "react-hot-toast"
 import { useRouter } from "next/navigation";
 import { useUser } from '@/lib/context/UserContext'
 import UserRoutes from '@/lib/components/Routes/UserRoutes'
+import { useAuth } from '@/lib/context/AuthContext'
 
-const Login = ({ title }) => {
+const page = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const { resetPassword } = useUser()
+    const { logout } = useAuth();
     const router = useRouter()
 
     const handleSubmit = async (e) => {
@@ -32,12 +34,8 @@ const Login = ({ title }) => {
                 if (data.error) {
                     toast.error(data.message)
                 } else {
-                    const auth = await localStorage.getItem('auth')
-                    if(auth){
-                        await localStorage.removeItem('auth')
-                        router.push("/")
-                    }
-                   
+                    logout();
+                    router.push("/");
                 }
             }
         } catch (error) {
@@ -91,4 +89,4 @@ const Login = ({ title }) => {
     )
 }
 
-export default Login
+export default page
