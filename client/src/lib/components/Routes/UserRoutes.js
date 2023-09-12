@@ -11,7 +11,7 @@ const UserRoutes = ({ children }) => {
     const authCheck = async () => {
       const res = await localStorage.getItem('auth')
       const data = JSON.parse(res)
-      if (data.user.role == 'user') {
+      if (data?.user?.role == 'user') {
         setOk(true);
       } else {
         setOk(false);

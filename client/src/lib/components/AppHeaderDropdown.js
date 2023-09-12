@@ -96,7 +96,7 @@ const AppHeaderDropdown = () => {
                 <CIcon icon={cilUser} className="me-2" />
                 Profile
               </CDropdownItem>
-              <CDropdownItem onClick={() => router.push(`/dashboard-user/user/resetPassword`)}>
+              <CDropdownItem onClick={() => router.push(auth?.user?.role === "user"? `/user/resetpassword`: `/admin/resetpassword`)}>
                 <MdOutlineLockReset className="me-2" fontSize={20} />
                 Reset Password
               </CDropdownItem>

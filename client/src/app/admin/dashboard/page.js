@@ -7,6 +7,7 @@ import { useWorklog } from '@/lib/context/WorklogContext';
 import { useProject } from '@/lib/context/ProjectContext';
 import { useUser } from '@/lib/context/UserContext';
 import { useRouter } from 'next/navigation';
+import AdminRoutes from '@/lib/components/Routes/AdminRoutes';
 
 function page() {
   const router = useRouter()
@@ -296,128 +297,73 @@ function page() {
     )
   }
 
-  if (userRole === null || userRole === undefined) {
-    return (
-      <CRow>
-        <CCol sm={3}>
-          <CWidgetStatsA
-            className="mb-4"
-            color="primary"
-            value={
-              <>
-                {employeeCount}
-              </>
-            }
-            title="Employee"
-            chart={chart1()}
-          />
-        </CCol>
-        <CCol sm={3}>
-          <CWidgetStatsA
-            className="mb-4"
-            color="info"
-            value={
-              <>
-                {allProjectsCount}
-              </>
-            }
-            title="Projects"
-            chart={chart2()}
-          />
-        </CCol>
-        <CCol sm={3}>
-          <CWidgetStatsA
-            className="mb-4"
-            color="warning"
-            value={
-              <>
-                {birthdayUsercount}
-              </>
-            }
-            title="Birthday on this month"
-            chart={chart3()}
-          />
-        </CCol>
-        <CCol sm={3}>
-          <CWidgetStatsA
-            className="mb-4"
-            color="danger"
-            value={
-              <>
-                {adminWorklogCount} h
-              </>
-            }
-            title="Worklog"
-            chart={chart4()}
-          />
-        </CCol>
-      </CRow>
-    )
-  }
-
   return (
-    <CRow>
-      <CCol sm={3}>
-        <div onClick={()=>router.push("/admin/user/list")} className="dashboard">
-          <CWidgetStatsA
-            color="primary"
-            className="mb-4"
-            value={
-              <>
-                {employeeCount}
-              </>
-            }
-            title="Employee"
-            chart={chart1()}
-          />
-        </div>
-      </CCol>
-      <CCol sm={3}>
-        <div onClick={()=>router.push("/admin/project/list")} className="dashboard">
-          <CWidgetStatsA
-            className="mb-4"
-            color="info"
-            value={
-              <>
-                {allProjectsCount}
-              </>
-            }
-            title="Projects"
-            chart={chart2()}
-          />
-        </div>
-      </CCol>
-      <CCol sm={3}>
-        <div onClick={()=>router.push("/admin/user/employeebirthdate")} className="dashboard">
-          <CWidgetStatsA
-            className="mb-4"
-            color="warning"
-            value={
-              <>
-                {birthdayUsercount}
-              </>
-            }
-            title="Birthday on this month"
-            chart={chart3()}
-          />
-        </div>
-      </CCol>
-      <CCol sm={3}>
-        <div onClick={()=>router.push("/admin/worklog/list")} className="dashboard">
-          <CWidgetStatsA
-            className="mb-4"
-            color="danger"
-            value={
-              <>
-                {adminWorklogCount}
-              </>
-            }
-            title="Worklog"
-            chart={chart4()}
-          />
-        </div>
-      </CCol>
-    </CRow>
+    <>
+      <AdminRoutes>
+        <CRow>
+          <CCol sm={3}>
+            <div onClick={() => router.push("/admin/user/list")} className="dashboard">
+              <CWidgetStatsA
+                color="primary"
+                className="mb-4"
+                value={
+                  <>
+                    {employeeCount}
+                  </>
+                }
+                title="Employee"
+                chart={chart1()}
+              />
+            </div>
+          </CCol>
+          <CCol sm={3}>
+            <div onClick={() => router.push("/admin/project/list")} className="dashboard">
+              <CWidgetStatsA
+                className="mb-4"
+                color="info"
+                value={
+                  <>
+                    {allProjectsCount}
+                  </>
+                }
+                title="Projects"
+                chart={chart2()}
+              />
+            </div>
+          </CCol>
+          <CCol sm={3}>
+            <div onClick={() => router.push("/admin/user/employeebirthdate")} className="dashboard">
+              <CWidgetStatsA
+                className="mb-4"
+                color="warning"
+                value={
+                  <>
+                    {birthdayUsercount}
+                  </>
+                }
+                title="Birthday on this month"
+                chart={chart3()}
+              />
+            </div>
+          </CCol>
+          <CCol sm={3}>
+            <div onClick={() => router.push("/admin/worklog/list")} className="dashboard">
+              <CWidgetStatsA
+                className="mb-4"
+                color="danger"
+                value={
+                  <>
+                    {adminWorklogCount}
+                  </>
+                }
+                title="Worklog"
+                chart={chart4()}
+              />
+            </div>
+          </CCol>
+        </CRow>
+      </AdminRoutes>
+    </>
   )
 }
 
