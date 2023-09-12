@@ -59,8 +59,6 @@ function AdminWorkLogList() {
             setIsLoading(false);
         }
     };
-    console.log("worklogList----", worklogList);
-    console.log("totalRecordsCount", totalRecords);
 
     const getRecords = async () => {
         if (auth.user !== null) {
@@ -75,8 +73,6 @@ function AdminWorkLogList() {
         fetchWorklog(filter, sortField, sortOrder);
     }, [currentPage, rowsPerPage, filter, sortField, sortOrder, auth]);
 
-    console.log("users----", users);
-    console.log("projects-----", projects);
     useEffect(() => {
         getRecords();
     }, [auth]);
