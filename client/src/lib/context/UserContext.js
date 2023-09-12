@@ -17,7 +17,6 @@ const UserProvider = ({ children }) => {
         try {
             const res = await axios.get("http://localhost:8080/user/userList", { headers });
             if (res.data.error === false) {
-                console.log(res.data);
                 return res.data
             }
         } catch (error) {
@@ -34,7 +33,6 @@ const UserProvider = ({ children }) => {
             } else {
                 res = await axios.get(`http://localhost:8080/user`, { params: { page, limit, sortField, sortOrder } }, { headers });
             }
-            console.log("ress---", res)
             if (res.data.error === false) {
                 return res.data
             }

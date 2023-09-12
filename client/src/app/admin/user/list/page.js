@@ -35,7 +35,6 @@ function Page() {
         sortField,
         sortOrder
       );
-      console.log(userData)
       const totalRecordsCount = userData.totalUsers;
       setTotalRecords(totalRecordsCount);
       setUserList(userData.users);
