@@ -37,7 +37,7 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <div onClick={()=> router.push(userRole === "user" ? '/user/dashboard' : "/admin/dashboard")} className="d-none d-md-flex pmSystem">
+        <div onClick={() => router.push(userRole === "user" ? '/user/dashboard' : "/admin/dashboard")} className="d-none d-md-flex pmSystem">
           <Avatar
             image='/kr_logo.ico'
             shape="circle"
@@ -46,7 +46,7 @@ const AppSidebar = () => {
         </div>
       </CSidebarBrand>
       <CSidebarNav>
-        <SimpleBar>
+        <SimpleBar style={{ cursor: "pointer" }}>
           {role && role === "admin" && <AppSidebarNav items={adminNavigatiion} />}
           {role && role === "user" && <AppSidebarNav items={userNavigation} />}
           {role === "" && <AppSidebarNav items={userNavigation} />}
