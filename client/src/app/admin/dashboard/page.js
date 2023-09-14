@@ -306,11 +306,7 @@ function page() {
               <CWidgetStatsA
                 color="primary"
                 className="mb-4"
-                value={
-                  <>
-                    {employeeCount}
-                  </>
-                }
+                value={employeeCount}
                 title="Employee"
                 chart={chart1()}
               />
@@ -321,11 +317,7 @@ function page() {
               <CWidgetStatsA
                 className="mb-4"
                 color="info"
-                value={
-                  <>
-                    {allProjectsCount}
-                  </>
-                }
+                value={allProjectsCount}
                 title="Projects"
                 chart={chart2()}
               />
@@ -336,11 +328,7 @@ function page() {
               <CWidgetStatsA
                 className="mb-4"
                 color="warning"
-                value={
-                  <>
-                    {birthdayUsercount}
-                  </>
-                }
+                value={birthdayUsercount}
                 title="Birthday on this month"
                 chart={chart3()}
               />
@@ -351,11 +339,7 @@ function page() {
               <CWidgetStatsA
                 className="mb-4"
                 color="danger"
-                value={
-                  <>
-                    {adminWorklogCount}
-                  </>
-                }
+                value={adminWorklogCount}
                 title="Worklog"
                 chart={chart4()}
               />

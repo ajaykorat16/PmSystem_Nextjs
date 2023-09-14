@@ -308,11 +308,7 @@ function page() {
               <CWidgetStatsA
                 className="mb-4"
                 color="primary"
-                value={
-                  <>
-                    {leaveCount}
-                  </>
-                }
+                value={leaveCount}
                 title="Leave This Month"
                 chart={chart1()}
               />
@@ -323,11 +319,7 @@ function page() {
               <CWidgetStatsA
                 className="mb-4"
                 color="info"
-                value={
-                  <>
-                    {projectcount}
-                  </>
-                }
+                value={projectcount}
                 title="My Projects"
                 chart={chart2()}
               />
@@ -338,11 +330,7 @@ function page() {
               <CWidgetStatsA
                 className="mb-4"
                 color="warning"
-                value={
-                  <>
-                    {birthdayUsercount}
-                  </>
-                }
+                value={birthdayUsercount}
                 title="Birthday on this month"
                 chart={chart3()}
               />
