@@ -216,4 +216,5 @@
 
 .dashboard {
     text-decoration: none !important;
+    cursor: pointer;
 }
