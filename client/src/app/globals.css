@@ -136,6 +136,7 @@
     font-size: larger;
     text-decoration: none;
     color: white;
+    cursor: pointer;
 }
 
 .box {
